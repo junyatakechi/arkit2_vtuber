@@ -84,9 +84,9 @@ public class FaceTracking : MonoBehaviour
         if (blendShapes == null || blendShapes.Count == 0)
             return;
         //mouth shape
-        proxy.ImmediatelySetValue(BlendShapePreset.A, NormalizationNumbers(blendShapes[ARBlendShapeLocation.JawOpen], (float)0.8));
-        proxy.ImmediatelySetValue(BlendShapePreset.I, NormalizationNumbers(blendShapes[ARBlendShapeLocation.JawForward], (float)0.6));
-        proxy.ImmediatelySetValue(BlendShapePreset.U, NormalizationNumbers(blendShapes[ARBlendShapeLocation.MouthPucker], (float)0.8));
+        proxy.ImmediatelySetValue(BlendShapePreset.A, NormalizationNumbers(blendShapes[ARBlendShapeLocation.JawOpen], (float)0.7));
+        proxy.ImmediatelySetValue(BlendShapePreset.I, NormalizationNumbers(blendShapes[ARBlendShapeLocation.JawForward], (float)0.7));
+        proxy.ImmediatelySetValue(BlendShapePreset.U, NormalizationNumbers(blendShapes[ARBlendShapeLocation.MouthPucker], (float)0.7));
         //eyes shape
         proxy.ImmediatelySetValue(BlendShapePreset.Blink_L, blendShapes[ARBlendShapeLocation.EyeBlinkLeft]);
         proxy.ImmediatelySetValue(BlendShapePreset.Blink_R, blendShapes[ARBlendShapeLocation.EyeBlinkRight]);

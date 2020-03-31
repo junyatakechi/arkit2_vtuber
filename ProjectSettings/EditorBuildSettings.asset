@@ -47,7 +47,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/UnityARKitPlugin/Examples/ARKit2.0/UnityARObjectAnchor/UnityARObjectAnchor.unity
     guid: 9b7966300d2d04d8e86ace41d59d178c
-  - enabled: 1
+  - enabled: 0
     path: Assets/FaceTracking.unity
     guid: 0fd1d3d1d1edc4370a387c5f75141662
+  - enabled: 1
+    path: Assets/Main.unity
+    guid: b2a2b822d480a4eb788b6afc3c036e94
   m_configObjects: {}
