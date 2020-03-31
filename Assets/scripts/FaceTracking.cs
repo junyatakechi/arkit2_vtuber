@@ -84,11 +84,19 @@ public class FaceTracking : MonoBehaviour
         if (blendShapes == null || blendShapes.Count == 0)
             return;
         //mouth shape
-        proxy.ImmediatelySetValue(BlendShapePreset.A, blendShapes[ARBlendShapeLocation.JawOpen] * 2);
-        proxy.ImmediatelySetValue(BlendShapePreset.I, blendShapes[ARBlendShapeLocation.JawForward] * 4);
-        proxy.ImmediatelySetValue(BlendShapePreset.U, blendShapes[ARBlendShapeLocation.MouthPucker] * 2);
+        proxy.ImmediatelySetValue(BlendShapePreset.A, NormalizationNumbers(blendShapes[ARBlendShapeLocation.JawOpen], (float)0.8));
+        proxy.ImmediatelySetValue(BlendShapePreset.I, NormalizationNumbers(blendShapes[ARBlendShapeLocation.JawForward], (float)0.6));
+        proxy.ImmediatelySetValue(BlendShapePreset.U, NormalizationNumbers(blendShapes[ARBlendShapeLocation.MouthPucker], (float)0.8));
         //eyes shape
         proxy.ImmediatelySetValue(BlendShapePreset.Blink_L, blendShapes[ARBlendShapeLocation.EyeBlinkLeft]);
         proxy.ImmediatelySetValue(BlendShapePreset.Blink_R, blendShapes[ARBlendShapeLocation.EyeBlinkRight]);
+    }
+
+    private float NormalizationNumbers(float input, float coeffient)
+    {
+        var max = 1;
+        var min = 0;
+        var output = (Mathf.Pow(input, coeffient) - Mathf.Pow(min, coeffient)) / (Mathf.Pow(max, coeffient) - Mathf.Pow(min, coeffient));
+        return output;
     }
 }
