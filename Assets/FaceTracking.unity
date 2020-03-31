@@ -369,6 +369,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 137674787330318422, guid: 55643ee57bdd54c0593e34be12a62f57,
+        type: 3}
+      propertyPath: m_SkinnedMotionVectors
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 55643ee57bdd54c0593e34be12a62f57, type: 3}
 --- !u!4 &566164791 stripped
@@ -396,6 +401,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1283292900242102, guid: 8855f6e449b9d4d3fae7f0a1a5ff9c2f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4164134588576822, guid: 8855f6e449b9d4d3fae7f0a1a5ff9c2f, type: 3}
       propertyPath: m_LocalPosition.z
       value: -0.65
