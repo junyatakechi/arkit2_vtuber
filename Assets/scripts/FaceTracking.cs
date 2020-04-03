@@ -4,10 +4,13 @@ using UnityEngine;
 using VRM;
 using UnityEngine.XR.iOS;
 
+
 public class FaceTracking : MonoBehaviour
 {
     [Header("VRMモデル")]
     public Transform Head;
+    public Transform Chest;
+
     public VRMBlendShapeProxy proxy;
 
     private UnityARSessionNativeInterface Session;
@@ -74,8 +77,13 @@ public class FaceTracking : MonoBehaviour
         rot.ToAngleAxis(out angle, out axis);
         axis.x = -axis.x;
         axis.z = -axis.z;
+        //head
         Head.localRotation = Quaternion.AngleAxis(angle, axis);
-
+        //chest
+        axis.x = NormalizationNumbers(axis.x, 1.0f, 10f, 0f);
+        axis.y = NormalizationNumbers(axis.y, 1.0f, 15f, 0f);
+        axis.z = NormalizationNumbers(axis.z, 1.0f, 10f, 0f);
+        Chest.localRotation = Quaternion.AngleAxis(angle, axis);
     }
 
     void UpdateFace(ARFaceAnchor anchorData)
@@ -84,27 +92,25 @@ public class FaceTracking : MonoBehaviour
         if (blendShapes == null || blendShapes.Count == 0)
             return;
         //mouth shape
-        proxy.ImmediatelySetValue(BlendShapePreset.A, NormalizationNumbers(blendShapes[ARBlendShapeLocation.JawOpen], (float)0.7));
-        proxy.ImmediatelySetValue(BlendShapePreset.I, NormalizationNumbers(blendShapes[ARBlendShapeLocation.JawForward], (float)0.7));
-        proxy.ImmediatelySetValue(BlendShapePreset.U, NormalizationNumbers(blendShapes[ARBlendShapeLocation.MouthPucker], (float)0.7));
+        proxy.ImmediatelySetValue(BlendShapePreset.O, NormalizationNumbers(blendShapes[ARBlendShapeLocation.JawOpen], 0.7f));
+        proxy.ImmediatelySetValue(BlendShapePreset.I, NormalizationNumbers(blendShapes[ARBlendShapeLocation.JawForward], 0.7f));
+        proxy.ImmediatelySetValue(BlendShapePreset.U, NormalizationNumbers(blendShapes[ARBlendShapeLocation.MouthPucker], 0.7f));
         //blink shape
         proxy.ImmediatelySetValue(BlendShapePreset.Blink_L, blendShapes[ARBlendShapeLocation.EyeBlinkLeft]);
         proxy.ImmediatelySetValue(BlendShapePreset.Blink_R, blendShapes[ARBlendShapeLocation.EyeBlinkRight]);
         //eyes shape
-        float lookDown = (blendShapes[ARBlendShapeLocation.EyeLookDownLeft] + blendShapes[ARBlendShapeLocation.EyeLookDownRight]) / 2;
-        float lookUp = (blendShapes[ARBlendShapeLocation.EyeLookUpLeft] + blendShapes[ARBlendShapeLocation.EyeLookUpRight]) / 2;
-        float lookLeft = (blendShapes[ARBlendShapeLocation.EyeLookOutLeft] + blendShapes[ARBlendShapeLocation.EyeLookInRight]) / 2;
-        float lookRight = (blendShapes[ARBlendShapeLocation.EyeLookInLeft] + blendShapes[ARBlendShapeLocation.EyeLookOutRight]) / 2;
-        proxy.ImmediatelySetValue(BlendShapePreset.LookDown, NormalizationNumbers(lookDown, (float)0.7));
-        proxy.ImmediatelySetValue(BlendShapePreset.LookUp, NormalizationNumbers(lookUp, (float)0.7));
-        proxy.ImmediatelySetValue(BlendShapePreset.LookLeft, NormalizationNumbers(lookLeft, (float)0.7));
-        proxy.ImmediatelySetValue(BlendShapePreset.LookRight, NormalizationNumbers(lookRight, (float)0.7));
+        float lookDown = (blendShapes[ARBlendShapeLocation.EyeLookDownLeft] + blendShapes[ARBlendShapeLocation.EyeLookDownRight]) / 2.0f;
+        float lookUp = (blendShapes[ARBlendShapeLocation.EyeLookUpLeft] + blendShapes[ARBlendShapeLocation.EyeLookUpRight]) / 2.0f;
+        float lookLeft = (blendShapes[ARBlendShapeLocation.EyeLookOutLeft] + blendShapes[ARBlendShapeLocation.EyeLookInRight]) / 2.0f;
+        float lookRight = (blendShapes[ARBlendShapeLocation.EyeLookInLeft] + blendShapes[ARBlendShapeLocation.EyeLookOutRight]) / 2.0f;
+        proxy.ImmediatelySetValue(BlendShapePreset.LookDown, lookDown);
+        proxy.ImmediatelySetValue(BlendShapePreset.LookUp, lookUp);
+        proxy.ImmediatelySetValue(BlendShapePreset.LookLeft, lookLeft);
+        proxy.ImmediatelySetValue(BlendShapePreset.LookRight, lookRight);
     }
 
-    private float NormalizationNumbers(float input, float coeffient)
+    private float NormalizationNumbers(float input, float coeffient, float max=1.0f, float min=0.0f)
     {
-        var max = 1;
-        var min = 0;
         var output = (Mathf.Pow(input, coeffient) - Mathf.Pow(min, coeffient)) / (Mathf.Pow(max, coeffient) - Mathf.Pow(min, coeffient));
         return output;
     }

@@ -18,6 +18,10 @@ MonoBehaviour:
   Values:
   - RelativePath: Face
     Index: 7
-    Weight: 73.3
-  MaterialValues: []
+    Weight: 72.5
+  MaterialValues:
+  - MaterialName: F00_000_00_FaceMouth_00_FACE
+    ValueName: _MainTex_ST
+    TargetValue: {x: 1, y: 1, z: 0, w: 0}
+    BaseValue: {x: 1, y: 1, z: 0, w: 0}
   IsBinary: 0
