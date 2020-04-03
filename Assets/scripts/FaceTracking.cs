@@ -87,9 +87,18 @@ public class FaceTracking : MonoBehaviour
         proxy.ImmediatelySetValue(BlendShapePreset.A, NormalizationNumbers(blendShapes[ARBlendShapeLocation.JawOpen], (float)0.7));
         proxy.ImmediatelySetValue(BlendShapePreset.I, NormalizationNumbers(blendShapes[ARBlendShapeLocation.JawForward], (float)0.7));
         proxy.ImmediatelySetValue(BlendShapePreset.U, NormalizationNumbers(blendShapes[ARBlendShapeLocation.MouthPucker], (float)0.7));
-        //eyes shape
+        //blink shape
         proxy.ImmediatelySetValue(BlendShapePreset.Blink_L, blendShapes[ARBlendShapeLocation.EyeBlinkLeft]);
         proxy.ImmediatelySetValue(BlendShapePreset.Blink_R, blendShapes[ARBlendShapeLocation.EyeBlinkRight]);
+        //eyes shape
+        float lookDown = (blendShapes[ARBlendShapeLocation.EyeLookDownLeft] + blendShapes[ARBlendShapeLocation.EyeLookDownRight]) / 2;
+        float lookUp = (blendShapes[ARBlendShapeLocation.EyeLookUpLeft] + blendShapes[ARBlendShapeLocation.EyeLookUpRight]) / 2;
+        float lookLeft = (blendShapes[ARBlendShapeLocation.EyeLookOutLeft] + blendShapes[ARBlendShapeLocation.EyeLookInRight]) / 2;
+        float lookRight = (blendShapes[ARBlendShapeLocation.EyeLookInLeft] + blendShapes[ARBlendShapeLocation.EyeLookOutRight]) / 2;
+        proxy.ImmediatelySetValue(BlendShapePreset.LookDown, NormalizationNumbers(lookDown, (float)0.7));
+        proxy.ImmediatelySetValue(BlendShapePreset.LookUp, NormalizationNumbers(lookUp, (float)0.7));
+        proxy.ImmediatelySetValue(BlendShapePreset.LookLeft, NormalizationNumbers(lookLeft, (float)0.7));
+        proxy.ImmediatelySetValue(BlendShapePreset.LookRight, NormalizationNumbers(lookRight, (float)0.7));
     }
 
     private float NormalizationNumbers(float input, float coeffient)

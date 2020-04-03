@@ -16,5 +16,9 @@ MonoBehaviour:
   BlendShapeName: LookUp
   Preset: 12
   Values: []
-  MaterialValues: []
+  MaterialValues:
+  - MaterialName: F00_000_00_EyeIris_00_EYE
+    ValueName: _MainTex_ST
+    TargetValue: {x: 1, y: 1, z: 0, w: -0.15}
+    BaseValue: {x: 1, y: 1, z: 0, w: 0}
   IsBinary: 0
