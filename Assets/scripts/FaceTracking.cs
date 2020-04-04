@@ -82,15 +82,16 @@ public class FaceTracking : MonoBehaviour
         //head
         Head.localRotation = Quaternion.AngleAxis(angle, axis);
         //chest
-        Vector3 chest_angle = axis;
-        Observable.TimerFrame(6).Subscribe(_ =>
-            {
-                chest_angle.x = NormalizationNumbers(chest_angle.x, 1.0f, 0.5f, -0.5f);
-                chest_angle.y = NormalizationNumbers(chest_angle.y, 1.0f, 0.5f, -0.5f);
-                chest_angle.z = 0.0f;
-                Chest.localRotation = Quaternion.AngleAxis(angle, axis);
-            }
-        );
+        Vector3 chest_axis = axis;
+        float chest_angle = angle;
+        {
+            Observable.TimerFrame(6).Subscribe(_ =>
+                {
+                    Chest.localRotation = Quaternion.AngleAxis(chest_angle, chest_axis);
+                }
+            );
+        }
+
         //Observable.TimerFrame(12).Subscribe(_ =>
         //    {
         //        //hip
@@ -126,11 +127,11 @@ public class FaceTracking : MonoBehaviour
 
         if (eyes_points.x > 0.0f)
         {
-            proxy.ImmediatelySetValue(BlendShapePreset.LookRight, eyes_points.x);
+            proxy.ImmediatelySetValue(BlendShapePreset.LookRight, eyes_points.x * 1.5f);
         }
         else
         {
-            proxy.ImmediatelySetValue(BlendShapePreset.LookLeft, Mathf.Abs(eyes_points.x));
+            proxy.ImmediatelySetValue(BlendShapePreset.LookLeft, Mathf.Abs(eyes_points.x * 1.5f));
         }
     }
 

@@ -215,6 +215,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vita
       objectReference: {fileID: 0}
+    - target: {fileID: 4038756174794474, guid: 55643ee57bdd54c0593e34be12a62f57, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4038756174794474, guid: 55643ee57bdd54c0593e34be12a62f57, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4038756174794474, guid: 55643ee57bdd54c0593e34be12a62f57, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4038756174794474, guid: 55643ee57bdd54c0593e34be12a62f57, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4038756174794474, guid: 55643ee57bdd54c0593e34be12a62f57, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4060977402825564, guid: 55643ee57bdd54c0593e34be12a62f57, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
