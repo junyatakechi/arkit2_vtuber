@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using VRM;
 using UnityEngine.XR.iOS;
+using UniRx;
 
 
 public class FaceTracking : MonoBehaviour
@@ -10,6 +11,7 @@ public class FaceTracking : MonoBehaviour
     [Header("VRMモデル")]
     public Transform Head;
     public Transform Chest;
+    public Transform Hip;
 
     public VRMBlendShapeProxy proxy;
 
@@ -80,10 +82,24 @@ public class FaceTracking : MonoBehaviour
         //head
         Head.localRotation = Quaternion.AngleAxis(angle, axis);
         //chest
-        axis.x = NormalizationNumbers(axis.x, 1.0f, 10f, 0f);
-        axis.y = NormalizationNumbers(axis.y, 1.0f, 15f, 0f);
-        axis.z = NormalizationNumbers(axis.z, 1.0f, 10f, 0f);
-        Chest.localRotation = Quaternion.AngleAxis(angle, axis);
+        Vector3 chest_angle = axis;
+        Observable.TimerFrame(6).Subscribe(_ =>
+            {
+                chest_angle.x = NormalizationNumbers(chest_angle.x, 1.0f, 0.5f, -0.5f);
+                chest_angle.y = NormalizationNumbers(chest_angle.y, 1.0f, 0.5f, -0.5f);
+                chest_angle.z = 0.0f;
+                Chest.localRotation = Quaternion.AngleAxis(angle, axis);
+            }
+        );
+        //Observable.TimerFrame(12).Subscribe(_ =>
+        //    {
+        //        //hip
+        //        axis.x = 0;
+        //        axis.y = NormalizationNumbers(axis.y, 1.0f, 3.0f, 0.0f);
+        //        axis.z = 0;
+        //        Hip.localRotation = Quaternion.AngleAxis(angle, axis);
+        //    }
+        //);
     }
 
     void UpdateFace(ARFaceAnchor anchorData)
@@ -99,14 +115,23 @@ public class FaceTracking : MonoBehaviour
         proxy.ImmediatelySetValue(BlendShapePreset.Blink_L, blendShapes[ARBlendShapeLocation.EyeBlinkLeft]);
         proxy.ImmediatelySetValue(BlendShapePreset.Blink_R, blendShapes[ARBlendShapeLocation.EyeBlinkRight]);
         //eyes shape
-        float lookDown = (blendShapes[ARBlendShapeLocation.EyeLookDownLeft] + blendShapes[ARBlendShapeLocation.EyeLookDownRight]) / 2.0f;
-        float lookUp = (blendShapes[ARBlendShapeLocation.EyeLookUpLeft] + blendShapes[ARBlendShapeLocation.EyeLookUpRight]) / 2.0f;
-        float lookLeft = (blendShapes[ARBlendShapeLocation.EyeLookOutLeft] + blendShapes[ARBlendShapeLocation.EyeLookInRight]) / 2.0f;
-        float lookRight = (blendShapes[ARBlendShapeLocation.EyeLookInLeft] + blendShapes[ARBlendShapeLocation.EyeLookOutRight]) / 2.0f;
-        proxy.ImmediatelySetValue(BlendShapePreset.LookDown, lookDown);
-        proxy.ImmediatelySetValue(BlendShapePreset.LookUp, lookUp);
-        proxy.ImmediatelySetValue(BlendShapePreset.LookLeft, lookLeft);
-        proxy.ImmediatelySetValue(BlendShapePreset.LookRight, lookRight);
+        Vector3 eyes_points = anchorData.lookAtPoint;
+        if (eyes_points.y > 0.0f)
+        {
+            proxy.ImmediatelySetValue(BlendShapePreset.LookUp, eyes_points.y);
+        }
+        else {
+            proxy.ImmediatelySetValue(BlendShapePreset.LookDown, Mathf.Abs(eyes_points.y));
+        }
+
+        if (eyes_points.x > 0.0f)
+        {
+            proxy.ImmediatelySetValue(BlendShapePreset.LookRight, eyes_points.x);
+        }
+        else
+        {
+            proxy.ImmediatelySetValue(BlendShapePreset.LookLeft, Mathf.Abs(eyes_points.x));
+        }
     }
 
     private float NormalizationNumbers(float input, float coeffient, float max=1.0f, float min=0.0f)
