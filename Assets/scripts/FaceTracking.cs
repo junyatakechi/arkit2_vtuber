@@ -4,6 +4,7 @@ using UnityEngine;
 using VRM;
 using UnityEngine.XR.iOS;
 using UniRx;
+using UnityEngine.UI;
 
 
 public class FaceTracking : MonoBehaviour
@@ -11,7 +12,10 @@ public class FaceTracking : MonoBehaviour
     [Header("VRMモデル")]
     public Transform Head;
     public Transform Chest;
-    public Transform Hip;
+    public Text view_angle;
+    public Text view_axisz;
+    public Text view_axisy;
+    public Text view_axisx;
 
     public VRMBlendShapeProxy proxy;
 
@@ -27,11 +31,10 @@ public class FaceTracking : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
     }
 
 
-    void InitializeARSession()
+    public void InitializeARSession()
     {
         Session = UnityARSessionNativeInterface.GetARSessionNativeInterface();
         ARKitFaceTrackingConfiguration configuration = new ARKitFaceTrackingConfiguration();
@@ -79,28 +82,21 @@ public class FaceTracking : MonoBehaviour
         rot.ToAngleAxis(out angle, out axis);
         axis.x = -axis.x;
         axis.z = -axis.z;
+        view_axisz.text = string.Format("axisz:{0}", axis.z); //debug////////////////////////////////
+        view_axisy.text = string.Format("axisy:{0}", axis.y); //debug////////////////////////////////
+        view_axisx.text = string.Format("axisx:{0}", axis.x); //debug////////////////////////////////
+        view_angle.text = string.Format("angle:{0}", angle); //debug////////////////////////////////
         //head
         Head.localRotation = Quaternion.AngleAxis(angle, axis);
         //chest
         Vector3 chest_axis = axis;
         float chest_angle = angle;
-        {
-            Observable.TimerFrame(6).Subscribe(_ =>
-                {
-                    Chest.localRotation = Quaternion.AngleAxis(chest_angle, chest_axis);
-                }
-            );
-        }
-
-        //Observable.TimerFrame(12).Subscribe(_ =>
-        //    {
-        //        //hip
-        //        axis.x = 0;
-        //        axis.y = NormalizationNumbers(axis.y, 1.0f, 3.0f, 0.0f);
-        //        axis.z = 0;
-        //        Hip.localRotation = Quaternion.AngleAxis(angle, axis);
-        //    }
-        //);
+        if (chest_angle < 345f) {chest_angle = 345f;} //limited
+        Observable.TimerFrame(5).Subscribe(_ =>
+            {
+                Chest.localRotation = Quaternion.AngleAxis(chest_angle, chest_axis);
+            }
+        );
     }
 
     void UpdateFace(ARFaceAnchor anchorData)
@@ -140,4 +136,6 @@ public class FaceTracking : MonoBehaviour
         var output = (Mathf.Pow(input, coeffient) - Mathf.Pow(min, coeffient)) / (Mathf.Pow(max, coeffient) - Mathf.Pow(min, coeffient));
         return output;
     }
+
+
 }

@@ -15,10 +15,7 @@ MonoBehaviour:
   m_prefab: {fileID: 1713813245995384, guid: 55643ee57bdd54c0593e34be12a62f57, type: 3}
   BlendShapeName: Neutral
   Preset: 1
-  Values:
-  - RelativePath: Face
-    Index: 7
-    Weight: 72.5
+  Values: []
   MaterialValues:
   - MaterialName: F00_000_00_FaceMouth_00_FACE
     ValueName: _MainTex_ST
