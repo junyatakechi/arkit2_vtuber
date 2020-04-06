@@ -34,25 +34,36 @@ public class FaceTracking : MonoBehaviour
     }
 
 
-    public void InitializeARSession()
+    void InitializeARSession()
     {
         Session = UnityARSessionNativeInterface.GetARSessionNativeInterface();
         ARKitFaceTrackingConfiguration configuration = new ARKitFaceTrackingConfiguration();
         configuration.alignment = UnityARAlignment.UnityARAlignmentGravity;
         configuration.enableLightEstimation = true;
+        //オプションを追加
+        var options = UnityARSessionRunOption.ARSessionRunOptionRemoveExistingAnchors | UnityARSessionRunOption.ARSessionRunOptionResetTracking;
 
         if (configuration.IsSupported)
         {
             UnityARSessionNativeInterface.ARFaceAnchorAddedEvent += FaceAdd;
             UnityARSessionNativeInterface.ARFaceAnchorUpdatedEvent += FaceUpdate;
-            UnityARSessionNativeInterface.ARFaceAnchorRemovedEvent += FaeRemoved;
+            UnityARSessionNativeInterface.ARFaceAnchorRemovedEvent += FaceRemoved;
         }
         else
         {
             // 利用できない場合の処理
         }
 
-        Session.RunWithConfig(configuration);
+        //オプションをセット
+        Session.RunWithConfigAndOptions(configuration, options);
+    }
+
+    public void RestARFace() {
+        UnityARSessionNativeInterface.ARFaceAnchorAddedEvent -= FaceAdd;
+        UnityARSessionNativeInterface.ARFaceAnchorUpdatedEvent -= FaceUpdate;
+        UnityARSessionNativeInterface.ARFaceAnchorRemovedEvent -= FaceRemoved;
+        Session = null;
+        InitializeARSession();
     }
 
 
@@ -68,7 +79,7 @@ public class FaceTracking : MonoBehaviour
         UpdateFace(anchorData);
     }
 
-    void FaeRemoved(ARFaceAnchor anchorData)
+    void FaceRemoved(ARFaceAnchor anchorData)
     {
         // 顔の認識ができなくなった場合の処理
     }

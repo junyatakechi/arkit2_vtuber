@@ -320,6 +320,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: {fileID: 0}
   proxy: {fileID: 504630749}
+  ft: {fileID: 0}
 --- !u!114 &238152056
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -552,6 +553,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: {fileID: 0}
   proxy: {fileID: 504630749}
+  ft: {fileID: 0}
 --- !u!114 &403510377
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2305,12 +2307,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 944504591}
   m_CullTransparentMesh: 0
---- !u!4 &1164681535 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4257356722397398, guid: 55643ee57bdd54c0593e34be12a62f57,
-    type: 3}
-  m_PrefabInstance: {fileID: 504630748}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1184308122
 GameObject:
   m_ObjectHideFlags: 0
@@ -2527,6 +2523,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: {fileID: 0}
   proxy: {fileID: 504630749}
+  ft: {fileID: 0}
 --- !u!114 &1327750662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2746,6 +2743,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: {fileID: 0}
   proxy: {fileID: 504630749}
+  ft: {fileID: 0}
 --- !u!114 &1346268986
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3040,6 +3038,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: {fileID: 2010755572}
   proxy: {fileID: 504630749}
+  ft: {fileID: 1503223728}
 --- !u!114 &1426800064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3081,7 +3080,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1426800063}
-        m_MethodName: RetargetFaceButton
+        m_MethodName: ResetFaceButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3157,7 +3156,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Head: {fileID: 504630750}
   Chest: {fileID: 1320354808}
-  Hip: {fileID: 1164681535}
   view_angle: {fileID: 209724559}
   view_axisz: {fileID: 1330590035}
   view_axisy: {fileID: 1184308124}
@@ -3300,6 +3298,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: {fileID: 0}
   proxy: {fileID: 504630749}
+  ft: {fileID: 0}
 --- !u!114 &1765464173
 MonoBehaviour:
   m_ObjectHideFlags: 0

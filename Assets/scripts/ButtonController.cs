@@ -6,6 +6,7 @@ public class ButtonController : MonoBehaviour
 {
     public Text text;
     public VRMBlendShapeProxy proxy;
+    public FaceTracking ft;
 
     // Start is called before the first frame update
     void Start()
@@ -19,11 +20,10 @@ public class ButtonController : MonoBehaviour
         
     }
 
-    /// Retarget Face tracking
-    public void RetargetFaceButton()
+    /// Reset Face tracking
+    public void ResetFaceButton()
     {
-        //var f = new FaceTracking();
-        //f.InitializeARSession();
+        ft.RestARFace();
     }
 
     // click button
