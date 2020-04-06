@@ -19,5 +19,8 @@ MonoBehaviour:
   - RelativePath: Face
     Index: 6
     Weight: 100
+  - RelativePath: Face
+    Index: 19
+    Weight: 100
   MaterialValues: []
   IsBinary: 0

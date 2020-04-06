@@ -12,12 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37562b39ff933b245ac2f35d87edbcd6, type: 3}
   m_Name: BlendShape.Joy
   m_EditorClassIdentifier: 
-  m_prefab: {fileID: 0}
+  m_prefab: {fileID: 1713813245995384, guid: 55643ee57bdd54c0593e34be12a62f57, type: 3}
   BlendShapeName: Joy
   Preset: 8
   Values:
   - RelativePath: Face
-    Index: 4
+    Index: 6
+    Weight: 75.6
+  - RelativePath: Face
+    Index: 7
     Weight: 100
+  - RelativePath: Face
+    Index: 18
+    Weight: 100
+  - RelativePath: Face
+    Index: 19
+    Weight: 28.2
+  - RelativePath: Face
+    Index: 25
+    Weight: 17.8
   MaterialValues: []
   IsBinary: 0

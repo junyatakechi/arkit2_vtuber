@@ -16,9 +16,5 @@ MonoBehaviour:
   BlendShapeName: Neutral
   Preset: 1
   Values: []
-  MaterialValues:
-  - MaterialName: F00_000_00_FaceMouth_00_FACE
-    ValueName: _MainTex_ST
-    TargetValue: {x: 1, y: 1, z: 0, w: 0}
-    BaseValue: {x: 1, y: 1, z: 0, w: 0}
+  MaterialValues: []
   IsBinary: 0
